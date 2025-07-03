@@ -34,9 +34,10 @@ function Home() {
     return (
         <div style={{
             position: 'absolute',
-            top: '25vh',
+            top: '20vh',
             left: '280px',
             right: '30px',
+            bottom: '30px',
             zIndex: 1,
             display: 'flex',
             flexDirection: 'column',
@@ -58,7 +59,8 @@ function Home() {
                 justifyContent: 'center',
                 flexWrap: 'wrap',
                 width: '100%',
-                maxWidth: '1000px'
+                maxWidth: '1000px',
+                marginBottom: activeMenu ? '2rem' : '0'
             }}>
                 {Object.entries(menuData).map(([menuName, data]) => (
                     <div key={menuName} style={{
@@ -109,50 +111,109 @@ function Home() {
                                 ▼
                             </span>
                         </button>
-                        
-                        {activeMenu === menuName && (
-                            <div style={{
-                                marginTop: '1rem',
-                                backgroundColor: 'white',
-                                border: '1px solid #e9ecef',
-                                borderRadius: '8px',
-                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                                overflow: 'hidden',
-                                animation: 'slideDown 0.3s ease-out'
-                            }}>
-                                {data.items.map((item, index) => (
-                                    <div key={index} style={{
-                                        padding: '0.75rem 1rem',
-                                        borderBottom: index < data.items.length - 1 ? '1px solid #f1f3f4' : 'none',
-                                        color: '#495057',
-                                        fontSize: '0.95rem',
-                                        transition: 'background-color 0.2s ease'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.target.style.backgroundColor = '#f8f9fa';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.target.style.backgroundColor = 'white';
-                                    }}
-                                    >
-                                        {item}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
                     </div>
                 ))}
             </div>
+            
+            {activeMenu && (
+                <div style={{
+                    width: '100%',
+                    flex: '1',
+                    backgroundColor: 'white',
+                    border: '1px solid #e9ecef',
+                    borderRadius: '12px',
+                    boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                    overflow: 'hidden',
+                    animation: 'slideDown 0.4s ease-out',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }}>
+                    <div style={{
+                        padding: '2rem',
+                        borderBottom: '1px solid #f1f3f4',
+                        backgroundColor: '#f8f9fa'
+                    }}>
+                        <h2 style={{
+                            margin: '0',
+                            color: '#2c3e50',
+                            fontSize: '1.8rem',
+                            fontWeight: '600',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '1rem'
+                        }}>
+                            <span style={{ fontSize: '2rem' }}>
+                                {menuData[activeMenu].icon}
+                            </span>
+                            {activeMenu}
+                        </h2>
+                    </div>
+                    
+                    <div style={{
+                        flex: '1',
+                        padding: '2rem',
+                        overflowY: 'auto'
+                    }}>
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                            gap: '1.5rem'
+                        }}>
+                            {menuData[activeMenu].items.map((item, index) => (
+                                <div key={index} style={{
+                                    padding: '1.5rem',
+                                    backgroundColor: '#f8f9fa',
+                                    borderRadius: '8px',
+                                    border: '1px solid #e9ecef',
+                                    color: '#495057',
+                                    fontSize: '1.1rem',
+                                    transition: 'all 0.2s ease',
+                                    cursor: 'pointer'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.target.style.backgroundColor = '#e3f2fd';
+                                    e.target.style.transform = 'translateY(-2px)';
+                                    e.target.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.target.style.backgroundColor = '#f8f9fa';
+                                    e.target.style.transform = 'translateY(0)';
+                                    e.target.style.boxShadow = 'none';
+                                }}
+                                >
+                                    <div style={{
+                                        fontWeight: '600',
+                                        marginBottom: '0.5rem',
+                                        color: '#2c3e50'
+                                    }}>
+                                        {item}
+                                    </div>
+                                    <div style={{
+                                        fontSize: '0.9rem',
+                                        color: '#6c757d'
+                                    }}>
+                                        {activeMenu === 'My Tasks' && 'Click to view details'}
+                                        {activeMenu === 'Upcoming Meetings' && 'Click to join'}
+                                        {activeMenu === 'Due Soon' && 'Click to view progress'}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
             
             <style jsx>{`
                 @keyframes slideDown {
                     from {
                         opacity: 0;
-                        transform: translateY(-10px);
+                        transform: translateY(-20px);
+                        max-height: 0;
                     }
                     to {
                         opacity: 1;
                         transform: translateY(0);
+                        max-height: 100vh;
                     }
                 }
             `}</style>
