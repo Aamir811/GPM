@@ -44,6 +44,7 @@
 .sidebar-nav {
     flex: 1;
     padding: 1rem 0;
+    overflow-y: auto;
 }
 
 .nav-list {
@@ -159,6 +160,81 @@
     margin-right: 0.5rem;
 }
 
+/* Project Item Styles */
+.project-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.project-item .sub-link {
+    flex: 1;
+    margin-right: 0;
+}
+
+.project-dropdown-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    margin-right: 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    min-width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-dropdown-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.project-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+}
+
+.project-arrow.open {
+    transform: rotate(90deg);
+}
+
+.project-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0 0;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    overflow: hidden;
+    animation: slideDown 0.2s ease-out;
+}
+
+.project-subitem {
+    margin-bottom: 0;
+}
+
+.project-sub-link {
+    padding: 0.4rem 1rem 0.4rem 3.5rem;
+    margin-right: 1rem;
+    font-size: 0.85rem;
+    border-radius: 0 15px 15px 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.project-sub-link:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateX(2px);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.project-sub-link .nav-icon {
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .sidebar {
@@ -180,5 +256,14 @@
     .sub-link {
         margin-right: 0;
         border-radius: 0;
+    }
+    
+    .project-sub-link {
+        margin-right: 0;
+        border-radius: 0;
+    }
+    
+    .project-dropdown-btn {
+        margin-right: 0;
     }
 } 

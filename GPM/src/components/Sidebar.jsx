@@ -4,16 +4,40 @@ import './Sidebar.css';
 
 function Sidebar() {
     const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+    const [openProjectDropdowns, setOpenProjectDropdowns] = useState({});
     const location = useLocation();
 
     const toggleProjects = () => {
         setIsProjectsOpen(!isProjectsOpen);
+        // Close all project dropdowns when main projects menu is closed
+        if (isProjectsOpen) {
+            setOpenProjectDropdowns({});
+        }
+    };
+
+    const toggleProjectDropdown = (projectIndex) => {
+        setOpenProjectDropdowns(prev => ({
+            ...prev,
+            [projectIndex]: !prev[projectIndex]
+        }));
     };
 
     const projectItems = [
-        { label: 'Project 1', icon: '📁' },
-        { label: 'Project 2', icon: '📁' },
-        { label: 'Project 3', icon: '📁' },
+        { 
+            label: 'Project 1', 
+            icon: '📁',
+            subItems: ['Project 1 Home', 'Settings', 'Team']
+        },
+        { 
+            label: 'Project 2', 
+            icon: '📁',
+            subItems: ['Project 2 Home', 'Settings', 'Team']
+        },
+        { 
+            label: 'Project 3', 
+            icon: '📁',
+            subItems: ['Project 3 Home', 'Settings', 'Team']
+        },
     ];
 
     return (
@@ -43,10 +67,36 @@ function Sidebar() {
                             <ul className="dropdown-menu">
                                 {projectItems.map((project, index) => (
                                     <li key={index} className="dropdown-item">
-                                        <div className="nav-link sub-link">
-                                            <span className="nav-icon">{project.icon}</span>
-                                            <span className="nav-text">{project.label}</span>
+                                        <div className="project-item">
+                                            <div className="nav-link sub-link">
+                                                <span className="nav-icon">{project.icon}</span>
+                                                <span className="nav-text">{project.label}</span>
+                                            </div>
+                                            <button 
+                                                className="project-dropdown-btn"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    toggleProjectDropdown(index);
+                                                }}
+                                            >
+                                                <span className={`project-arrow ${openProjectDropdowns[index] ? 'open' : ''}`}>
+                                                    ▶
+                                                </span>
+                                            </button>
                                         </div>
+                                        
+                                        {openProjectDropdowns[index] && (
+                                            <ul className="project-submenu">
+                                                {project.subItems.map((subItem, subIndex) => (
+                                                    <li key={subIndex} className="project-subitem">
+                                                        <div className="nav-link project-sub-link">
+                                                            <span className="nav-icon">•</span>
+                                                            <span className="nav-text">{subItem}</span>
+                                                        </div>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
                                     </li>
                                 ))}
                             </ul>
