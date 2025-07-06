@@ -19,12 +19,26 @@ function ProjectView() {
     ];
 
     return (
-        <>
-            <h1>Project View</h1>
+        <div style={{
+            position: 'absolute',
+            top: '0vh',
+            left: '280px',
+            right: '30px',
+            bottom: '30px',
+            zIndex: 1,
+            padding: '2rem'
+        }}>
+            <h1 style={{
+                fontSize: '2.5rem',
+                color: '#2c3e50',
+                margin: '0 0 2rem 0',
+                fontWeight: 'normal'
+            }}>Project View</h1>
             <div
                 style={{
                     display: "flex",
                     alignItems: "flex-start",
+                    gap: "2rem"
                 }}
             >
                 <div
@@ -55,7 +69,7 @@ function ProjectView() {
                     }
                 />
             </div>
-        </>
+        </div>
     );
 }
 
