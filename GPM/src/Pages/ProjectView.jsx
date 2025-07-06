@@ -21,7 +21,7 @@ function ProjectView() {
     return (
         <div style={{
             position: 'absolute',
-            top: '0vh',
+            top: '1vh',
             left: '280px',
             right: '30px',
             bottom: '30px',
