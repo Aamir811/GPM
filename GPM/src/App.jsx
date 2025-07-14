@@ -6,12 +6,12 @@ import ProjectView from './Pages/ProjectView';
 function App() {
     return (
         <Router>
-            <Layout>
-                <Routes>
+            <Routes>
+                <Route element={<Layout />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/projectview" element={<ProjectView />} />
-                </Routes>
-            </Layout>
+                </Route>
+            </Routes>
         </Router>
     );
 }
